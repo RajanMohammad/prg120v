@@ -36,7 +36,7 @@ include("oblig2/db.php"); /* tilkobling til database-serveren utført og valg av
 $sqlSetning="SELECT * FROM emne WHERE klassekode='$klassekode';";
 $sqlResultat=mysqli_query($db,$sqlSetning) or die ("ikke mulig &aring; hente data fra databasen");
 $antallRader=mysqli_num_rows($sqlResultat);
-if ($antallRader!=0) /* faget er registrert fra før */
+if ($antallRader!=0) /* klassen er registrert fra før */
 {
 print ("Emnet er registrert fra f&oslashr");
 }
