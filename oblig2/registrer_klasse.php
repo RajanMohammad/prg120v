@@ -23,16 +23,34 @@
 <?php
 if (isset($_POST["klassekode"]))
 { 
+    $klassekode = $_POST["klassekode"];
+    $klassenavn = $_POST["klassenavn"]; 
+    $studiumkode = $_POST["studiumkode"];
+
+    if (!$klassekode || !$klassenavn || !$studiumkode)
+    {
+        print ("Alle felt m&aring; fylles ut");
+    }
+    else
+    {
     include ('oblig2/db.php');
+
+    $sqlSetning = "INSERT INTO klasse (klassekode, klassenavn, studiumkode) VALUES ('$klassekode', '$klassenavn', '$studiumkode');";
+    $sqlResultat = mysqli_query($db, $sqlSetning) or die ("Ikke mulig å registrere data i databasen");
+    $antallRader = mysqli_num_rows($sqlResultat);
     
-    $klassekode = mysqli_real_escape_string($db, $_POST["klassekode"]);
-    $klassenavn = mysqli_real_escape_string($db, $_POST["klassenavn"]);
-    $studiumkode = mysqli_real_escape_string($db, $_POST["studiumkode"]);
-    
-    $sqlsetning = "INSERT INTO klasse (klassekode, klassenavn, studiumkode) VALUES ('$klassekode', '$klassenavn', '$studiumkode');";
-    mysqli_query($db, $sqlsetning) or die ("Ikke mulig å registrere data i databasen");
-    
+    if ($antallRader==0)
+    {
+        print ("Klassen er allerede registrert i databasen");
+    }
+    else 
+    {
+    $sqlSetning = "INSERT INTO klasse (klassekode, klassenavn, studiumkode) VALUES ('$klassekode', '$klassenavn', '$studiumkode');";
+    Values('$klassekode', '$klassenavn', '$studiumkode');";
+    mysqli_query($db, $sqlSetning) or die ("Ikke mulig å registrere data i databasen");
     print ("<h2>Følgende klasse er nå registrert:</h2>");
-    print ("Klassekode: $klassekode <br> Klassenavn: $klassenavn <br> Studiumkode: $studiumkode <br>");
-}
+    print (F&oslash;lgende klasse er n&aring; registrert: <br> Klassekode: $klassekode <br> Klassenavn: $klassenavn <br> Studiumkode: $studiumkode <br>");
+    }
+    }
+    }   
 ?>
