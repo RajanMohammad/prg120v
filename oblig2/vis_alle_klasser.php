@@ -1,21 +1,29 @@
-<meta charset="UTF-8">
-<?php
-include ('db.php');
+<?php  /* vis_alle_klasser */
+/*
+/*  Programmet skriver ut alle registrerte klasser
+*/
+  include ('db.php');  /* tilkobling til database-serveren utf�rt og valg av database foretatt */
 
-$sqlsetning = "SELECT * FROM klasse order by klassekode;";
-$sqlresultat = mysqli_query($db, $sqlsetning) or die ("Ikke mulig å hente data fra databasen");
-$antallRader = mysqli_num_rows($sqlresultat);
+  $sqlSetning="SELECT * FROM klasse;";
+  
+  $sqlResultat=mysqli_query($db,$sqlSetning) or die ("ikke mulig &aring; hente data fra databasen");
+    /* SQL-setning sendt til database-serveren */
+	
+  $antallRader=mysqli_num_rows($sqlResultat);  /* antall rader i resultatet beregnet */
 
-print ("<h2>Alle klasser</h2>");
-print ("<table border='1'>");
-print ("<tr> <th> Klassekode </th> <th> Klassenavn </th> <th> Studiumkode </th> </tr>");
+  print ("<h3>Registrerte klasser </h3>");
+  print ("<table border=1>");  
+  print ("<tr><th align=left>klassekode</th> <th align=left>klassenavn</th> <th align=left>studiumkode</th></tr>");
 
-for ($r = 1; $r <= $antallRader; $r++) {
-    $rad = mysqli_fetch_array($sqlresultat);
-    $klassekode = $rad["klassekode"];
-    $klassenavn = $rad["klassenavn"];
-$studiumkode = $rad["studiumkode"];
-    print ("<tr> <td> $klassekode </td> <td> $klassenavn </td> <td> $studiumkode </td> </tr>");
-}
-print ("</table>");
+  for ($r=1;$r<=$antallRader;$r++)
+    {
+      $rad=mysqli_fetch_array($sqlResultat);  /* ny rad hentet fra sp�rringsresultatet */
+      $klassekode=$rad["klassekode"];        /* ELLER $klassekode=$rad[0]; */
+      $klassenavn=$rad["klassenavn"];    /* ELLER $klassenavn=$rad[1]; */
+      $studiumkode=$rad["studiumkode"];    /* ELLER $studiumkode=$rad[2]; */
+
+      print ("<tr> <td> $klassekode </td> <td> $klassenavn </td> <td> $studiumkode </td> </tr>");
+
+    }
+  print ("</table>"); 
 ?>
