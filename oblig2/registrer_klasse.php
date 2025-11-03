@@ -21,36 +21,32 @@
 </form>
 
 <?php
-if (isset($_POST["klassekode"]))
-{ 
-    $klassekode = $_POST["klassekode"];
-    $klassenavn = $_POST["klassenavn"]; 
-    $studiumkode = $_POST["studiumkode"];
-
-    if (!$klassekode || !$klassenavn || !$studiumkode)
-    {
-        print ("Alle felt m&aring; fylles ut");
-    }
-    else
-    {
-    include ('oblig2/db.php');
-
-    $sqlSetning = "INSERT INTO klasse (klassekode, klassenavn, studiumkode) VALUES ('$klassekode', '$klassenavn', '$studiumkode');";
-    $sqlResultat = mysqli_query($db, $sqlSetning) or die ("Ikke mulig å registrere data i databasen");
-    $antallRader = mysqli_num_rows($sqlResultat);
-    
-    if ($antallRader==0)
-    {
-        print ("Klassen er allerede registrert i databasen");
-    }
-    else 
-    {
-    $sqlSetning = "INSERT INTO klasse (klassekode, klassenavn, studiumkode) VALUES ('$klassekode', '$klassenavn', '$studiumkode');";
-    Values('$klassekode', '$klassenavn', '$studiumkode');";
-    mysqli_query($db, $sqlSetning) or die ("Ikke mulig å registrere data i databasen");
-    print ("<h2>Følgende klasse er nå registrert:</h2>");
-    print (F&oslash;lgende klasse er n&aring; registrert: <br> Klassekode: $klassekode <br> Klassenavn: $klassenavn <br> Studiumkode: $studiumkode <br>");
-    }
-    }
-    }   
+if (isset($_POST ["klassekode"]))
+{
+$klassekode=$_POST ["klassekode"];
+$klassenavn=$_POST ["klassenavn"];
+$studiumkode=$_POST ["studiumkode"];
+if (!$klasskode || !$klassenavn || !$studiumkode)
+{
+print ("Alle felt m&aring; fylles ut");
+}
+else
+{
+include("oblig2/db.php"); /* tilkobling til database-serveren utført og valg av database foretatt */
+$sqlSetning="SELECT * FROM emne WHERE klassekode='$klassekode';";
+$sqlResultat=mysqli_query($db,$sqlSetning) or die ("ikke mulig &aring; hente data fra databasen");
+$antallRader=mysqli_num_rows($sqlResultat);
+if ($antallRader!=0) /* faget er registrert fra før */
+{
+print ("Emnet er registrert fra f&oslashr");
+}
+else
+{
+$sqlSetning="INSERT INTO emne (klassekode,klassenavn,studiumkode)
+VALUES('$klassekode','$klassenavn','$studiumkode');";
+mysqli_query($db,$sqlSetning) or die ("ikke mulig &aring; registrere data i databasen");
+print ("F&oslash;lgende emne er n&aring; registrert: $klassekode $klassenavn $studiumkode");
+}
+}
+}
 ?>
