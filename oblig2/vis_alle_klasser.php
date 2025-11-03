@@ -2,14 +2,12 @@
 /*
 /*  Programmet skriver ut alle registrerte klasser
 */
-  include ('db.php');  /* tilkobling til database-serveren utf�rt og valg av database foretatt */
+  include ("db.php");  /* tilkobling til database-serveren utf�rt og valg av database foretatt */
 
-  $sqlSetning="SELECT * FROM klasse;";
-  
+  $sqlSetning="SELECT * FROM klasse ORDER BY klassekode;";
   $sqlResultat=mysqli_query($db,$sqlSetning) or die ("ikke mulig &aring; hente data fra databasen");
     /* SQL-setning sendt til database-serveren */
-	
-  $antallRader=mysqli_num_rows($sqlResultat);  /* antall rader i resultatet beregnet */
+	$antallRader=mysqli_num_rows($sqlResultat);  /* antall rader i resultatet beregnet */
 
   print ("<h3>Registrerte klasser </h3>");
   print ("<table border=1>");  
