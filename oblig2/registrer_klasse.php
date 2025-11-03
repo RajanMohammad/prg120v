@@ -23,7 +23,7 @@
 <?php
 if (isset($_POST["klassekode"]))
 { 
-    include ('db.php');
+    include ('oblig2/db.php');
     
     $klassekode = mysqli_real_escape_string($db, $_POST["klassekode"]);
     $klassenavn = mysqli_real_escape_string($db, $_POST["klassenavn"]);
