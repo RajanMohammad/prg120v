@@ -1,24 +1,17 @@
-    <meta charset ="UTF-8">
-    <?php /* oblig2/slett_klasse.php */
-    /*
-    /*Programmet lager et skjema for sletting av en klasse fra databasen
-    /*Programmet sletter klassen når skjema er sendt inn    
-    */
+<meta charset="UTF-8">
+<title>Sletting av klasse</title> 
 
-    ?>
-
-    <script type="text/javascript">
-     function bekfreft() {
+<h>Sletting av klasse</h>
+<?php include ("db.php"); ?>
+<script type="text/javascript">
+    function bekreft() {
         return confirm("Er du sikker?")
-     }
+    }
 </script>
-
-    <h2>Slett en klasse</h2>
-
-   
+<br><br>
 <form method="post" id="slettKlasse" name="slettKlasse" onSubmit="return bekreft()">
     Velg klasse <select id="klasseKode" name="klasseKode" required>
-        <?php $sqlSetning="SELECT * FROM klasse ORDER BY klassekode;"; include("db.php"); /* tilkobling til database-serveren utført og valg av database foretatt */
+        <?php $sqlSetning="SELECT * FROM klasse ORDER BY klassekode;";
         $sqlResultat=mysqli_query($db,$sqlSetning) or die ("kunne ikke hente data fra databasen");
         $antallRader=mysqli_num_rows($sqlResultat);
 
